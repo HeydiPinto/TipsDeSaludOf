@@ -1,52 +1,34 @@
 package com.example.heydi.tips_de_salud;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 
-public class ActividadListaArticulos extends AppCompatActivity {
+import com.example.heydi.tips_de_salud.modeloA.ModeloArticulos;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.actividad_lista_articulos);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+/**
+ * Actividad con la lista de artículos. Si el ancho del dispositivo es mayor o igual a 900dp, entonces
+ * se incrusta el fragmento de detalle {@link FragmentoDetalleArticulo} para generar el patrón
+ * Master-detail
+ */
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_actividad_lista_articulos, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+public class ActividadListaArticulos extends AppCompatActivity implements FragmentoListaArticulos.EscuchaFragmento {
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+@Override
+protected void onCreate(Bundle savedInstanceState){
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.actividad_lista_articulos);
 
-        return super.onOptionsItemSelected(item);
-    }
+    ((Toolbar) findViewById(R.id.toolbar)).setTitle(getTitle());
+
+    //Agregar fragmento de lista
+    getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_lista, FragmentoListaArticulos.crear()).commit();
+}
+@Override
+    public void alSeleccionarItem(String idArticulo){
+
+}
 }
