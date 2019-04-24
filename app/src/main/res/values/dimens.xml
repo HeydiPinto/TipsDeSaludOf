@@ -6,4 +6,5 @@
     <dimen name="ancho_panel_lista">512dp</dimen>
 
     <bool name="esTablet">false</bool>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>
